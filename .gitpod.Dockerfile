@@ -11,6 +11,8 @@ RUN apt-get update \
     direnv \
     && rm -rf /var/lib/apt/lists/*
 
+ARG USER=gitpod
+
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.0/zsh-in-docker.sh)" -- \
     -t https://github.com/denysdovhan/spaceship-prompt \
     -a 'SPACESHIP_PROMPT_ADD_NEWLINE="false"' \
@@ -24,4 +26,4 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 RUN curl https://mise.run | sh
 
 # Append the mise activation script to .zshrc
-#RUN echo 'eval "$(/home/${USER}/.local/bin/mise activate zsh)"' >> /home/${USER}/.zshrc
+RUN echo 'eval "$(~${USER}/.local/bin/mise activate zsh)"' >> ~${USER}/.zshrc
